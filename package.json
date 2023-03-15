@@ -4,7 +4,9 @@
   "description": "Repository for learning backend using express and prisma",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "dev": "nodemon ./src/app.ts",
+    "start": "node ./src/app.js"
   },
   "repository": {
     "type": "git",
