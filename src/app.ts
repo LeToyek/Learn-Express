@@ -1,9 +1,9 @@
 import { config } from "dotenv";
 
 import express, { Application, NextFunction, Request, Response } from 'express';
-import cars from "./model/car";
-import { Cat, cats } from "./model/cat";
-import { getAllUser } from "./service/user";
+import cars from "./repository/model/car";
+import { cats } from "./repository/model/cat";
+import { getAllUser } from "./usecase/user";
 
 
 config()
@@ -13,9 +13,6 @@ const app: Application =express()
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 
-function middleware(req: Request<Cat>, res: Response,next: NextFunction) {
-  //@ts-ignore
-}
 
 app.get('/',(req: Request,res :Response, next: NextFunction)=>{
   res.send("Route Get Work")
@@ -45,12 +42,7 @@ app.route("/books/:id/:author").get(
   }
 )
 
-app.route("/users").get(
-  async (req :Request, res :Response)  =>{
-    const users = await getAllUser()
-    res.send(users)
-  }
-)
+app.route("/users").get(getAllUser)
 
 
 
