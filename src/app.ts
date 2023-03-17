@@ -3,7 +3,7 @@ import { config } from "dotenv";
 import express, { Application, NextFunction, Request, Response } from 'express';
 import cars from "./repository/model/car";
 import { cats } from "./repository/model/cat";
-import { getAllUser } from "./usecase/user";
+import { addUser, getAllUser, kickUser, updateUser } from "./usecase/user";
 
 
 config()
@@ -42,7 +42,8 @@ app.route("/books/:id/:author").get(
   }
 )
 
-app.route("/users").get(getAllUser)
+app.route("/users").get(getAllUser).post(addUser)
+app.route("/users/:id").delete(kickUser).put(updateUser)
 
 
 
